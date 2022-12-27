@@ -1,13 +1,24 @@
 import '../styles/globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { MantineProvider } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 import { AppProps } from 'next/app'
+import { useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
+
+import useAuth from '@/hooks/useAuth'
 
 export default function App(props: AppProps) {
+    const { fetchProfile } = useAuth()
     const { Component, pageProps } = props
-
+    useEffect(() => {
+        fetchProfile()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
         <>
+            <ToastContainer />
             <MantineProvider
                 withGlobalStyles
                 withNormalizeCSS
@@ -32,7 +43,9 @@ export default function App(props: AppProps) {
                     }
                 }}
             >
-                <Component {...pageProps} />
+                <NotificationsProvider>
+                    <Component {...pageProps} />
+                </NotificationsProvider>
             </MantineProvider>
         </>
     )

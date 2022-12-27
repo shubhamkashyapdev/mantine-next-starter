@@ -1,14 +1,8 @@
 import axios from 'axios'
 
 const http = axios.create({
-    baseURL: process.env.SERVER_URI
-})
-
-http.interceptors.request.use((config) => {
-    return {
-        withCredentials: true,
-        ...config
-    }
+    baseURL: process.env.NEXT_PUBLIC_SERVER_URI,
+    withCredentials: true
 })
 
 export default http

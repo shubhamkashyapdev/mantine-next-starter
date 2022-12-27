@@ -12,6 +12,8 @@ import { useDisclosure } from '@mantine/hooks'
 import { IconBrandGithubCopilot, IconChevronDown } from '@tabler/icons'
 import { NestedLinkType } from 'types/component'
 
+import useAuthStore from '@/store/authStore'
+
 const HEADER_HEIGHT = 60
 
 const useStyles = createStyles((theme) => ({
@@ -65,6 +67,7 @@ interface HeaderActionProps {
 }
 
 export default function HeaderAction({ links }: HeaderActionProps) {
+    const { authenticated } = useAuthStore()
     const { classes } = useStyles()
     const [opened, { toggle }] = useDisclosure(false)
     const items = links.map((link) => {
@@ -135,7 +138,7 @@ export default function HeaderAction({ links }: HeaderActionProps) {
                     radius="sm"
                     sx={{ height: 35 }}
                 >
-                    Mantine Next.js Starter
+                    {authenticated ? 'Profile' : 'Login'}
                 </Button>
             </Container>
         </Header>

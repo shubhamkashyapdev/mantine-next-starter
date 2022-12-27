@@ -1,9 +1,12 @@
 import { Box, Button, Checkbox, Group, TextInput, Title } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import Layout from 'components/layout/Layout'
-import { loginSchema } from 'types/component'
+
+import useAuth from '@/hooks/useAuth'
+import { loginSchema } from '@/types/component'
 
 export default function Home() {
+    const { authenticateUser } = useAuth()
     const form = useForm({
         initialValues: {
             email: '',
@@ -11,6 +14,10 @@ export default function Home() {
         },
         validate: zodResolver(loginSchema)
     })
+    const handleSubmit = async () => {
+        await authenticateUser(form.values)
+    }
+
     return (
         <>
             <Layout>
@@ -29,7 +36,7 @@ export default function Home() {
                         <Title mb={'md'} color="primary.1">
                             Login
                         </Title>
-                        <form onSubmit={form.onSubmit(() => {})}>
+                        <form onSubmit={form.onSubmit(handleSubmit)}>
                             <TextInput
                                 withAsterisk
                                 label="Email"
