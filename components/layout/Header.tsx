@@ -125,8 +125,17 @@ export default function HeaderAction({ links }: HeaderActionProps) {
                 <Group spacing={5} className={classes.links}>
                     {items}
                 </Group>
-                <Button radius="xl" sx={{ height: 30 }}>
-                    Get early access
+                <Button
+                    variant="gradient"
+                    gradient={{
+                        from: 'primary.1',
+                        to: 'primary.6',
+                        deg: 160
+                    }}
+                    radius="sm"
+                    sx={{ height: 35 }}
+                >
+                    Mantine Next.js Starter
                 </Button>
             </Container>
         </Header>

@@ -7,7 +7,7 @@ export default function Home() {
     const form = useForm({
         initialValues: {
             email: '',
-            termsOfService: false
+            password: ''
         },
         validate: zodResolver(loginSchema)
     })
@@ -18,12 +18,17 @@ export default function Home() {
                     <Box
                         sx={(theme) => ({
                             width: 300,
-                            borderColor: theme.colors.primary[1]
+                            borderColor: theme.colors.primary[1],
+                            borderWidth: 1,
+                            borderStyle: 'solid',
+                            borderRadius: 4
                         })}
-                        className="border-[1px] p-4 shadow-md"
+                        className=" p-4 shadow-lg shadow-white/5"
                         mx="auto"
                     >
-                        <Title color="primary.1">Login</Title>
+                        <Title mb={'md'} color="primary.1">
+                            Login
+                        </Title>
                         <form onSubmit={form.onSubmit(() => {})}>
                             <TextInput
                                 withAsterisk
@@ -46,14 +51,14 @@ export default function Home() {
                                 })}
                             />
 
-                            <Group position="left" mt="md">
+                            <Group position="left" mt="lg">
                                 <Button
-                                    sx={(theme) => ({
-                                        root: {
-                                            backgroundColor:
-                                                theme.colors.primary[2]
-                                        }
-                                    })}
+                                    variant="gradient"
+                                    gradient={{
+                                        from: 'primary.1',
+                                        to: 'primary.6',
+                                        deg: 160
+                                    }}
                                     type="submit"
                                 >
                                     Submit
