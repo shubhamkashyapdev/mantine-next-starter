@@ -24,7 +24,7 @@ const loginUser = async (loginInput: LoginType) => {
 const getCurrentUser = async () => {
     try {
         const res = await http.get('/users/me')
-        return res.data
+        return res.data.user
     } catch (err) {
         if (err instanceof Error) {
             toast.error(err.message)

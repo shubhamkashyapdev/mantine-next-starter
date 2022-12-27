@@ -10,6 +10,7 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconBrandGithubCopilot, IconChevronDown } from '@tabler/icons'
+import { useRouter } from 'next/router'
 import { NestedLinkType } from 'types/component'
 
 import useAuthStore from '@/store/authStore'
@@ -67,6 +68,7 @@ interface HeaderActionProps {
 }
 
 export default function HeaderAction({ links }: HeaderActionProps) {
+    const router = useRouter()
     const { authenticated } = useAuthStore()
     const { classes } = useStyles()
     const [opened, { toggle }] = useDisclosure(false)
@@ -137,6 +139,14 @@ export default function HeaderAction({ links }: HeaderActionProps) {
                     }}
                     radius="sm"
                     sx={{ height: 35 }}
+                    onClick={() => {
+                        if (authenticated) {
+                            // @todo - navigate to user's profile panel
+                            router.push('/')
+                        } else {
+                            router.push('/login')
+                        }
+                    }}
                 >
                     {authenticated ? 'Profile' : 'Login'}
                 </Button>
