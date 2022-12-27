@@ -1,0 +1,54 @@
+[
+    {
+        "link": "/features",
+        "label": "Features"
+    },
+    {
+        "link": "/learn",
+        "label": "Learn",
+        "links": [
+            {
+                "link": "/documentation",
+                "label": "Documentation"
+            },
+            {
+                "link": "/resources",
+                "label": "Resources"
+            },
+            {
+                "link": "/comunity",
+                "label": "Comunity"
+            },
+            {
+                "link": "/blog",
+                "label": "Blog"
+            }
+        ]
+    },
+    {
+        "link": "/about",
+        "label": "About"
+    },
+    {
+        "link": "/pricing",
+        "label": "Pricing"
+    },
+    {
+        "link": "/support",
+        "label": "Support",
+        "links": [
+            {
+                "link": "/faq",
+                "label": "FAQs"
+            },
+            {
+                "link": "/book-a-demo",
+                "label": "Book A Demo"
+            },
+            {
+                "link": "/forum",
+                "label": "Forum"
+            }
+        ]
+    }
+]

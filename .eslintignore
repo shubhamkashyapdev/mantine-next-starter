@@ -1,0 +1,6 @@
+*.css
+*.svg
+dist
+build 
+node_modules
+public
