@@ -3,5 +3,8 @@ export type UserType = {
     email: string
     firstName: string
     lastName: string
-    role: string[]
+    displayName: string
+    mobileNumber: number
+    gender: 'male' | 'female'
+    roles: string[]
 }

@@ -13,7 +13,7 @@ import { IconBrandGithubCopilot, IconChevronDown } from '@tabler/icons'
 import { useRouter } from 'next/router'
 import { NestedLinkType } from 'types/component'
 
-import useAuthStore from '@/store/authStore'
+import useAuth from '@/hooks/useAuth'
 
 const HEADER_HEIGHT = 60
 
@@ -69,7 +69,7 @@ interface HeaderActionProps {
 
 export default function HeaderAction({ links }: HeaderActionProps) {
     const router = useRouter()
-    const { authenticated } = useAuthStore()
+    const { authenticated, logoutTheUser } = useAuth()
     const { classes } = useStyles()
     const [opened, { toggle }] = useDisclosure(false)
     const items = links.map((link) => {
@@ -130,26 +130,43 @@ export default function HeaderAction({ links }: HeaderActionProps) {
                 <Group spacing={5} className={classes.links}>
                     {items}
                 </Group>
-                <Button
-                    variant="gradient"
-                    gradient={{
-                        from: 'primary.1',
-                        to: 'primary.6',
-                        deg: 160
-                    }}
-                    radius="sm"
-                    sx={{ height: 35 }}
-                    onClick={() => {
-                        if (authenticated) {
-                            // @todo - navigate to user's profile panel
-                            router.push('/')
-                        } else {
-                            router.push('/login')
-                        }
-                    }}
-                >
-                    {authenticated ? 'Profile' : 'Login'}
-                </Button>
+                <Group>
+                    <Button
+                        variant="gradient"
+                        gradient={{
+                            from: 'primary.1',
+                            to: 'primary.6',
+                            deg: 160
+                        }}
+                        radius="sm"
+                        sx={{ height: 35 }}
+                        onClick={() => {
+                            if (authenticated) {
+                                // @todo - navigate to user's profile panel
+                                router.push('/')
+                            } else {
+                                router.push('/login')
+                            }
+                        }}
+                    >
+                        {authenticated ? 'Profile' : 'Login'}
+                    </Button>
+                    {authenticated ? (
+                        <Button
+                            variant="gradient"
+                            gradient={{
+                                from: 'primary.1',
+                                to: 'primary.6',
+                                deg: 160
+                            }}
+                            radius="sm"
+                            sx={{ height: 35 }}
+                            onClick={logoutTheUser}
+                        >
+                            Logout
+                        </Button>
+                    ) : null}
+                </Group>
             </Container>
         </Header>
     )

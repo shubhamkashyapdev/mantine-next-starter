@@ -38,9 +38,25 @@ const login = async (loginInput: LoginType) => {
     return user
 }
 
+const logout = async (logout: () => void) => {
+    try {
+        await http.post('/users/logout')
+        logout()
+    } catch (err) {
+        if (err instanceof Error) {
+            toast.error(err.message)
+        }
+    }
+}
+
 const useAuth = () => {
     const router = useRouter()
-    const { setUserDetails } = useAuthStore()
+    const {
+        setUserDetails,
+        authenticated,
+        user: userProfile,
+        logoutUser
+    } = useAuthStore()
     const fetchProfile = async () => {
         const user = await getCurrentUser()
         if (user) {
@@ -50,14 +66,23 @@ const useAuth = () => {
     const authenticateUser = async (loginInput: LoginType, route?: string) => {
         const data = await login(loginInput)
         if (data) {
-            setUserDetails(data.user)
+            setUserDetails(data)
             if (route) {
                 router.push(route)
             }
         }
         return data
     }
-    return { authenticateUser, fetchProfile }
+    const logoutTheUser = async () => {
+        await logout(logoutUser)
+    }
+    return {
+        authenticateUser,
+        fetchProfile,
+        authenticated,
+        user: userProfile,
+        logoutTheUser
+    }
 }
 
 export default useAuth

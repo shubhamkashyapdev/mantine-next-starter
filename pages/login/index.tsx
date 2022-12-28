@@ -1,12 +1,17 @@
 import { Box, Button, Checkbox, Group, TextInput, Title } from '@mantine/core'
 import { useForm, zodResolver } from '@mantine/form'
 import Layout from 'components/layout/Layout'
+import { useRouter } from 'next/router'
 
 import useAuth from '@/hooks/useAuth'
 import { loginSchema } from '@/types/component'
 
 export default function Home() {
-    const { authenticateUser } = useAuth()
+    const router = useRouter()
+    const { authenticateUser, authenticated } = useAuth()
+    if (authenticated) {
+        router.push('/')
+    }
     const form = useForm({
         initialValues: {
             email: '',
